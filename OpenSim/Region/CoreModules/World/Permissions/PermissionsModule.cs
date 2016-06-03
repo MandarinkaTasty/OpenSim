@@ -946,6 +946,10 @@ namespace OpenSim.Region.CoreModules.World.Permissions
             DebugPermissionInformation(MethodInfo.GetCurrentMethod().Name);
             if (m_bypassPermissions) return m_bypassPermissionsValue;
         
+            if (IsEstateManager(user))
+            {
+                return GenericParcelOwnerPermission(user, parcel, (ulong)GroupPowers.LandRelease, true);
+            }
             return GenericParcelOwnerPermission(user, parcel, (ulong)GroupPowers.LandRelease, false);
         }
 
@@ -1058,6 +1062,10 @@ namespace OpenSim.Region.CoreModules.World.Permissions
             DebugPermissionInformation(MethodInfo.GetCurrentMethod().Name);
             if (m_bypassPermissions) return m_bypassPermissionsValue;
 
+            if (IsEstateManager(user))
+            {
+                return GenericParcelOwnerPermission(user, parcel, (ulong)p, true);
+            }
             return GenericParcelOwnerPermission(user, parcel, (ulong)p, false);
         }
 
